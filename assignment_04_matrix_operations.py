@@ -60,3 +60,64 @@
 # YOUR CODE BELOW — remove the # symbols from the scaffold and fill it in
 # =============================================================================
 
+def print_matrix(matrix):
+    for row in matrix:
+        print(" ".join(str(val) for val in row))
+
+def transpose_matrix(matrix):
+    rows = len(matrix)
+    cols = len(matrix[0])
+    transposed = []
+    for j in range(cols):
+        new_row = []
+        for i in range(rows):
+            new_row.append(matrix[i][j])
+        transposed.append(new_row)
+    return transposed
+
+def add_matrices(matrix_a, matrix_b):
+    rows = len(matrix_a)
+    cols = len(matrix_a[0])
+    result = []
+    for i in range(rows):
+        row_sum = []
+        for j in range(cols):
+            row_sum.append(matrix_a[i][j] + matrix_b[i][j])
+        result.append(row_sum)
+    return result
+
+def multiply_matrices(matrix_a, matrix_b):
+    rows_a = len(matrix_a)
+    cols_a = len(matrix_a[0])
+    cols_b = len(matrix_b[0])
+    
+    result = []
+    for i in range(rows_a):
+        row_res = []
+        for j in range(cols_b):
+            cell_sum = 0
+            for k in range(cols_a):
+                cell_sum += matrix_a[i][k] * matrix_b[k][j]
+            row_res.append(cell_sum)
+        result.append(row_res)
+    return result
+
+def read_matrix(rows, cols, name="Matrix"):
+    matrix = []
+    for i in range(rows):
+        row_vals = list(map(int, input(f"Enter row {i + 1}: ").split()))
+        matrix.append(row_vals)
+    return matrix
+
+# --- PART A: Transpose ---
+print("--- PART A: Transpose Matrix ---")
+r = int(input("Enter number of rows: "))
+c = int(input("Enter number of columns: "))
+original = read_matrix(r, c)
+
+print("\nOriginal Matrix:")
+print_matrix(original)
+
+transposed = transpose_matrix(original)
+print("\nTransposed Matrix:")
+print_matrix(transposed)
